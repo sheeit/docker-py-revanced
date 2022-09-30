@@ -193,11 +193,14 @@ class Patches(object):
             setattr(self, app_name, [])
 
         for patch in patches:
-            for compatible_package in [x["name"] for x in patch["compatiblePackages"]]:
+            for compatible_package, version in [
+                (x["name"], x["versions"]) for x in patch["compatiblePackages"]
+            ]:
                 if compatible_package in app_ids:
                     app_name = app_ids[compatible_package][1]
-                    p = { x: patch[x] for x in ["name", "description", "version"] }
+                    p = {x: patch[x] for x in ["name", "description"]}
                     p["app"] = compatible_package
+                    p["version"] = version[-1] if version else "all"
                     getattr(self, app_name).append(p)
 
         for app_name, app_id in app_ids.values():
