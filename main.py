@@ -215,7 +215,7 @@ class Patches(object):
             "twitter": "_twitter",
             "warnwetter": "_warnwetter",
             "youtube": "_yt",
-            "youtube-music": "_ytm",
+            "youtube_music": "_ytm",
         }
         if not (app_name := app_names.get(app)):
             logger.debug("Invalid app name")
